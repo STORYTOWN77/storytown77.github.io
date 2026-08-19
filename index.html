@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>숲속으로... | 마음 이완 & 앰비언트 사운드</title>
+    <title>숲속의 음향 치유 | 마음 이완 & 앰비언트 사운드</title>
     
     <!-- 구글 애드센스 승인 코드 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1536570141970500" crossorigin="anonymous"></script>
 
     <style>
         :root {
-            --bg-dark: #12211d;
-            --card-bg: rgba(15, 35, 30, 0.65); /* 카드 반투명도 조절로 배경이 잘 보이게 변경 */
+            --card-bg: rgba(20, 40, 32, 0.75);
             --accent-green: #2ecc71;
-            --accent-gold: #f39c12;
             --text-light: #ffffff;
             --text-dim: #d0e0d8;
-            --border-color: rgba(255, 255, 255, 0.18);
+            --border-color: rgba(255, 255, 255, 0.2);
         }
 
         * {
@@ -27,13 +25,13 @@
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: #0f1f1a;
             color: var(--text-light);
             line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* 배경 비디오 및 오버레이 (밝기 강화) */
+        /* 배경 비디오 및 오버레이 (밝게 조정) */
         .video-background {
             position: fixed;
             top: 0;
@@ -48,7 +46,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.85) contrast(1.05); /* 어두운 느낌을 빼고 밝게 조정 */
+            filter: brightness(1.05) contrast(1.0); /* 밝고 깨끗하게 조정 */
         }
 
         .overlay {
@@ -57,67 +55,64 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 25, 20, 0.35); /* 어두운 그라데이션 제거 후 옅은 오버레이 적용 */
+            background: rgba(10, 20, 15, 0.25); /* 옅은 톤으로 투명도 조절 */
             z-index: -1;
         }
 
         .container {
-            max-width: 860px;
+            max-width: 880px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         header h1 {
-            font-size: 2.3rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
             color: #ffffff;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.7);
-            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            margin-bottom: 8px;
         }
 
         header p {
             color: #e0f0e8;
-            font-size: 1.1rem;
-            text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+            font-size: 1.05rem;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.7);
         }
 
         /* 카드 UI */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
         .section-title {
             font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             color: #4cd137;
             display: flex;
             align-items: center;
             gap: 8px;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
         }
 
-        /* 컨트롤 및 슬라이더 */
         .control-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .control-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-size: 0.95rem;
         }
 
@@ -139,7 +134,7 @@
         }
 
         .btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             border: 1px solid var(--border-color);
             color: var(--text-light);
             padding: 12px;
@@ -167,30 +162,25 @@
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
             margin-top: 10px;
         }
 
         .main-play-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.5);
         }
 
-        /* 광고 상자 */
+        /* 광고 영역 (빈 박스 테두리 제거) */
         .ad-container {
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 20px;
+            margin: 25px 0;
             text-align: center;
-            margin: 30px 0;
-            min-height: 100px;
+            min-height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* 아코디언 아티클 */
+        /* 아코디언 */
         .accordion-item {
             border-bottom: 1px solid var(--border-color);
         }
@@ -203,10 +193,10 @@
             width: 100%;
             background: none;
             border: none;
-            padding: 18px 10px;
+            padding: 16px 8px;
             text-align: left;
             color: var(--text-light);
-            font-size: 1.05rem;
+            font-size: 1.02rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -223,19 +213,19 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            padding: 0 10px;
+            padding: 0 8px;
             color: var(--text-dim);
             font-size: 0.95rem;
             line-height: 1.8;
         }
 
         .accordion-content p {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .accordion-content h4 {
-            color: var(--text-light);
-            margin: 15px 0 8px 0;
+            color: #ffffff;
+            margin: 14px 0 6px 0;
         }
 
         .arrow {
@@ -246,15 +236,13 @@
             transform: rotate(180deg);
         }
 
-        /* 푸터 */
         footer {
             text-align: center;
             padding: 30px 0;
             color: #d0e0d8;
             font-size: 0.85rem;
             border-top: 1px solid var(--border-color);
-            margin-top: 50px;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            margin-top: 40px;
         }
 
         footer a {
@@ -263,18 +251,12 @@
             margin: 0 10px;
         }
 
-        footer a:hover {
-            color: var(--accent-green);
-        }
-
-        /* 모달 팝업 */
+        /* 모달 */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.7);
             z-index: 1000;
             justify-content: center;
@@ -282,9 +264,9 @@
         }
 
         .modal-content {
-            background: #122623;
+            background: #142822;
             border: 1px solid var(--border-color);
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
             max-width: 500px;
             width: 90%;
@@ -300,9 +282,10 @@
 </head>
 <body>
 
-    <!-- 바람에 움직이는 숲 비디오 배경 (밝은 햇살 숲속) -->
+    <!-- 바람에 흔들리는 숲 비디오 배경 -->
     <div class="video-background">
         <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80">
+            <source src="https://cdn.pixabay.com/video/2020/05/25/40121-424089856_large.mp4" type="video/mp4">
             <source src="https://assets.mixkit.co/videos/preview/mixkit-sun-shining-through-the-trees-of-a-forest-41539-large.mp4" type="video/mp4">
         </video>
     </div>
@@ -314,7 +297,7 @@
             <p>바이노럴 비트와 자연 앰비언트 믹서로 깊은 이완과 집중을 경험하세요.</p>
         </header>
 
-        <!-- 애드센스 상단 광고 영역 -->
+        <!-- 상단 광고 영역 -->
         <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -371,61 +354,48 @@
             </div>
         </div>
 
-        <!-- 학술 아티클 세션 -->
+        <!-- 학술 아티클 22개 세션 -->
         <div class="card">
-            <div class="section-title">📚 숲의 글 (뇌과학 & 심리학 전문 칼럼)</div>
+            <div class="section-title">📚 숲의 글 (뇌과학 & 심리학 전문 칼럼 22선)</div>
 
-            <!-- 글 01 -->
-            <div class="accordion-item">
-                <button class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>숲의 글 01. 바이노럴 비트의 뇌파 동기화(Frequency Following Response) 메커니즘</span>
-                    <span class="arrow">▼</span>
-                </button>
-                <div class="accordion-content">
-                    <p>인간의 뇌는 외부에서 주어지는 주기적인 청각 자극에 신경망의 주파수를 맞추려는 생리적 특성을 가지고 있습니다. 이를 학술적으로 **청각 유발 반응(Auditory Evoked Response)** 또는 **주파수 추종 응답(Frequency Following Response, FFR)**이라고 부릅니다. 바이노럴 비트(Binaural Beats)는 이러한 뇌의 청각 동기화 원리를 양이청(Binaural Hearing) 생리학에 기반하여 구현한 대표적인 기술입니다.</p>
-                    <h4>1. 바이노럴 비트의 생리적 생성 원리</h4>
-                    <p>바이노럴 비트는 스피커가 아닌 양쪽 귀가 음향적으로 완전 분리되는 헤드폰이나 이어폰을 착용했을 때 작동합니다. 예를 들어 좌측 귀에 200Hz의 pure tone을 들려주고, 우측 귀에 206Hz의 음을 들려주면, 달팽이관을 거친 청각 신호는 뇌간의 **상올리브 핵(Superior Olivary Complex)**에서 합성됩니다. 상올리브 핵은 양쪽 귀에서 들어오는 소리의 시간차와 강도차를 계산하여 소리의 위치를 추적하는 뇌 부위인데, 두 주파수의 미세한 차이(6Hz)를 감지하여 뇌 내부에서 세번째 주파수인 6Hz의 주기적 진동을 만들어냅니다.</p>
-                    <h4>2. 뇌파 상태의 변화와 테타파(Theta Wave)유도</h4>
-                    <p>상올리브 핵에서 생성된 주기적 전기 신호는 대뇌 피질 전반으로 확산되어 전체적인 뇌파 신경망의 동기화를 유도합니다. 일상적인 청각 작업이나 스트레스 상황에서는 14~30Hz 대역의 높은 베티파(Beta Wave)가 지배적이지만, 지속적인 6Hz 바이노럴 비트 자극에 노출되면 뇌파가 4~8Hz 범위의 **테타파(Theta Wave)** 대역으로 이동하게 됩니다. 테타파는 명상 상태, 깊은 이완, 그리고 수면 직전의 신체적·정신적 안정 단계에서 관찰되는 뇌파입니다.</p>
-                    <h4>3. 자율신경계 및 자율 호르몬 분비 변화</h4>
-                    <p>임상 연구에 따르면, 테타파 대역의 바이노럴 비트를 20분 이상 청취한 피험자 그룹은 교감신경계의 활성도가 현저히 감소하고 부교감신경계(Parasympathetic Nervous System)의 미경신경 자극이 강화되는 결과를 보였습니다. 이 과정에서 대표적인 스트레스 호르몬인 코르티솔(Cortisol) 수치가 하향 조정되며, 뇌내 억제성 신경전달물질인 가바(GABA) 및 세로토닌의 분비가 촉진됩니다. 결론적으로 바이노럴 비트는 비침습적인 방법으로 뇌의 신경 화학적 환경을 재조정하여 고도의 정서적 안정을 유도하는 효과적인 뇌과학적 도구입니다.</p>
-                </div>
-            </div>
+            <script>
+                const articles = [
+                    { title: "01. 바이노럴 비트의 뇌파 동기화 메커니즘", body: "인간의 뇌는 외부 청각 자극에 반응하여 주파수를 맞추는 주파수 추종 응답(FFR) 생리 현상을 가집니다. 양쪽 귀에 미세하게 다른 주파수를 들려줄 때 뇌간 상올리브 핵에서 동기화 신호를 생성하여 알파파 및 테타파 유도를 돕습니다." },
+                    { title: "02. 자연 음향 스펙트럼과 핑크 노이즈의 이완 생리학", body: "숲의 빗소리와 나뭇잎 소리는 1/f 주파수 특성을 지닌 핑크 노이즈입니다. 이는 신체의 심박변이도(HRV) 수치와 수학적으로 동기화되어 교감신경을 안정시키고 깊은 수면 상태를 만듭니다." },
+                    { title: "03. 스트레스 완화를 위한 알파파 및 테타파 유도 기전", body: "만성 스트레스는 편도체를 과활성화시킵니다. 6Hz 대역의 테타파 음향은 대뇌 피질의 고주파 신호를 저온화하여 코르티솔 분비를 줄이고 신경적 안정감을 제공합니다." },
+                    { title: "04. 숲 치료(Forest Therapy)가 자율신경계에 미치는 영향", body: "삼림욕 환경은 NK세포(자연살해세포)의 활성도를 높이고 부교감신경계를 활성화합니다. 음향 사운드는 이러한 숲의 생리적 이점을 뇌에 직접 전달합니다." },
+                    { title: "05. 바이노럴 비트 청취 시 가바(GABA) 및 세로토닌의 변화", body: "뇌파 동기화 자극은 억제성 신경전달물질인 GABA의 분비를 촉진하고 세로토닌 합성을 도와 불안감과 정서적 불균형을 신속하게 완화시킵니다." },
+                    { title: "06. 현대인의 번아웃 증후군과 뇌 피로 회복 기전", body: "지속적인 정보 과부하는 디폴트 모드 네트워크(DMN)를 과열시킵니다. 단일 앰비언트 음향은 DMN의 불필요한 활성화를 막아 심층적 휴식을 제공합니다." },
+                    { title: "07. 청각 자극을 통한 수면 구조 개선과 서파 수면(Slow-wave Sleep)", body: "수면 전 핑크 노이즈 청취는 N3 단계의 델타파 깊은 수면 진입 속도를 촉진하며 수면 중 깨어남(Arousal)을 크게 방지합니다." },
+                    { title: "08. 피톤치드 향과 숲 사운드의 다감각 심리 이완", body: "시각 및 청각적 자연 자극이 통합될 때 전두엽 피질의 산소 소비량이 감소하여 뇌의 휴식 반응이 극대화됩니다." },
+                    { title: "09. 6Hz 테타파와 창의적 사고 및 기억력 정돈", body: "테타파 대역은 무의식적 아이디어 결합과 장기 기억 단단화(Consolidation)가 활발히 일어나는 상위 인지 상태입니다." },
+                    { title: "10. 불면증 개선을 위한 백색소음 vs 핑크소음 심층 비교", body: "고주파 에너지가 강한 백색소음보다 주파수가 높아질수록 감쇄하는 핑크소음이 수면 유지 및 심박 안정에 훨씬 효과적입니다." },
+                    { title: "11. 편도체(Amygdala) 안정화를 통한 불안 장애 조절", body: "음향 치료는 공포 자극에 민감한 편도체의 과반응성을 억제하여 심리적 안정 구역(Window of Tolerance)을 넓혀줍니다." },
+                    { title: "12. 만성 통증 완화에 대한 음향 유도 알파파의 임상 효과", body: "알파파 유도는 뇌의 통증 게이트 조절 이론에 따라 신체적 통증 자극 인지를 완화하는 보조적 효과를 가집니다." },
+                    { title: "13. 모노럴 비트와 바이노럴 비트의 신경학적 차이점", body: "모노럴 비트는 외부에서 합성된 주파수를 듣는 방식이지만, 바이노럴 비트는 양이청 반응을 통해 뇌 내부에서 직접 신호를 생성합니다." },
+                    { title: "14. 집중력 향상을 위한 베타파 및 감마파 동기화 활용법", body: "고도의 작업이나 공부가 필요한 경우 14~30Hz 베타파 자극을 통해 좌전두엽의 인지 자원 배분을 최적화할 수 있습니다." },
+                    { title: "15. 미경신경 자극(VNS)과 부교감 신경의 리듬 회복", body: "자연 음향 사운드는 미경신경의 톤을 높여 호흡을 완만하게 하고 신체 이완 및 소화기계의 활성화를 돕습니다." },
+                    { title: "16. 숲속 장작소리(Brown Noise)의 이완 및 불안 해소 원리", body: "저주파 에너지가 풍부한 브라운 노이즈는 뇌의 보호적 청각 장벽을 형성하여 시끄러운 환경 소음을 차단하고 안정감을 줍니다." },
+                    { title: "17. 주의집중력 결핍(ADHD) 완화를 위한 청각 마스킹 효과", body: "일정한 자연음 레이어링은 불규칙한 환경 소음을 덮어주어 인지적 산만함을 최소화하고 장시간 몰입을 유지해 줍니다." },
+                    { title: "18. 공황발작 및 긴급 불안 시 청각 이완법의 작용 기전", body: "급성 불안 상황에서 깊은 호흡음과 6Hz 소리를 함께 들으면 교감신경의 과도한 아드레날린 분비를 신속히 차단합니다." },
+                    { title: "19. 뇌가 느끼는 자연 소리의 진화심리학적 접근", body: "원시 인류에게 잔잔한 빗소리와 나뭇잎 소리는 '포식자가 없는 안전한 상태'를 뜻하는 신호로 유전자에 기각되어 있습니다." },
+                    { title: "20. 심박변이도(HRV) 향상을 위한 사운드 테라피의 실제", body: "주기적인 앰비언트 음향 청취는 HRV 지표 중 고주파(HF) 성분을 높여 심혈관계 전반의 건강성을 강화합니다." },
+                    { title: "21. 명상 및 요가 시 바이노럴 비트 결합의 시너지 효과", body: "호흡 명상과 테타파 사운드를 병행하면 단순 명상 대비 트랜스(Trance) 이완 상태에 도달하는 시간이 50% 이상 단축됩니다." },
+                    { title: "22. 디스플레이 화면의 생태적 visual 요소와 사운드의 결합", body: "움직이는 숲 비디오 시각 자극과 자연 앰비언트 사운드의 결합은 대뇌 시각피질과 청각피질의 동시 이완을 유도합니다." }
+                ];
 
-            <!-- 글 02 -->
-            <div class="accordion-item">
-                <button class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>숲의 글 02. 자연 음향 스펙트럼과 핑크 노이즈(Pink Noise)의 이완 생리학</span>
-                    <span class="arrow">▼</span>
-                </button>
-                <div class="accordion-content">
-                    <p>우리가 숲속에서 들을 수 있는 빗소리, 바람에 흔들리는 나뭇잎 소리, 계곡물 소리는 단순한 소음이 아닙니다. 음향학적으로 이러한 자연의 소리는 **핑크 노이즈(Pink Noise)**의 음향 스펙트럼 구조를 가지고 있으며, 인간의 신체 생리 주동과 완벽한 수학적 조화를 이룹니다.</p>
-                    <h4>1. 1/f 주파수 특성과 핑크 노이즈</h4>
-                    <p>음향 신호는 주파수 대역별 에너지 분포에 따라 백색소음(White Noise), 핑크 노이즈, 브라운 노이즈 등으로 구분됩니다. 모든 주파수 대역에 동일한 에너지가 분포하는 백색소음과 달리, 핑크 노이즈는 주파수가 높아질수록 에너지 밀도가 주파수에 반비례하여 감소하는 **1/f 에너지 스펙트럼**을 지닙니다. 저주파 대역의 에너지가 풍부하여 인간의 귀에 매우 부드럽고 자연스럽게 수용되는 특징을 가집니다.</p>
-                    <h4>2. 자연 생체 주기와 1/f 요동(Fluctuation)</h4>
-                    <p>흥미롭게도 자연계의 수많은 생체 신호는 1/f 요동 구조를 가지고 있습니다. 인간의 건강한 심장 박동 간격(HRV), 심뇌혈관의 혈류 변화, 심지어 뇌세포 간 전기적 신호 전달 주기도 1/f 패턴을 따릅니다. 따라서 숲속의 빗소리나 나뭇잎 소리와 같은 핑크 노이즈를 청취할 때, 우리 뇌의 청각 피질은 외부 자극을 위협이나 소음으로 인지하지 않고 내재적 생체 주기와 동기화시킵니다.</p>
-                    <h4>3. 수면 구조 개선 및 자율신경 안정</h4>
-                    <p>최근 뇌신경학 연구에 따르면 핑크 노이즈를 청취하며 휴식을 취하거나 수면을 취할 경우, 서파 수면(Slow-wave Sleep, 깊은 수면 단계)의 지속 시간이 연장되고 수면 중 뇌파의 안정성이 대폭 증가하는 것으로 확인되었습니다. 이는 핑크 노이즈가 청각 피질을 부드럽게 채워줌으로써 일상적인 돌발 소음(갑작스러운 차 소리, 인근 소음 등)에 대한 뇌의 경계 반응을 완화하고, 교감신경의 과도한 흥분을 억제해 심박수를 안정화하기 때문입니다.</p>
-                </div>
-            </div>
-
-            <!-- 글 03 -->
-            <div class="accordion-item">
-                <button class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>숲의 글 03. 스트레스 완화를 위한 알파파 및 테타파 유도 기전</span>
-                    <span class="arrow">▼</span>
-                </button>
-                <div class="accordion-content">
-                    <p>현대인이 겪는 만성 스트레스는 뇌의 차폐 기능을 저하시키고 교감신경을 지속적으로 과활성화 상태로 유지시킵니다. 이를 해소하기 위해서는 대뇌 피질의 주파수를 고주파(베타파)에서 저주파 대역인 **알파파(8~12Hz)** 및 **테타파(4~8Hz)**로 전환하는 생리학적 조작이 필수적입니다.</p>
-                    <h4>1. 알파파와 테타파의 정서적 의미</h4>
-                    <p>알파파는 눈을 감고 조용히 휴식을 취할 때 활성화되는 뇌파로, '알람 상태가 아닌 깨어있는 이완(Alert Relaxation)' 상태를 의미합니다. 반면 테타파는 명상가들이 깊은 삼매경에 들었을 때나 잠들기 직전에 출현하는 뇌파로, 무의식적 기억 정리와 심층적 정서 회복이 일어나는 구간입니다. 만성 스트레스 환자의 뇌파를 측정해 보면 두 대역의 뇌파 발생 비율이 현저히 낮아져 있음을 확인할 수 있습니다.</p>
-                    <h4>2. 변연계(Limbic System) 억제와 편도체 진정</h4>
-                    <p>스트레스 상황에서 공포와 불안 반응을 담당하는 뇌 부위는 **편도체(Amygdala)**입니다. 편도체가 과활성화되면 뇌하수체와 부신피질을 자극하여 코르티솔과 아드레날린을 대량 분비시킵니다. 바이노럴 비팅 기법을 통해 뇌파를 알파/테타파 대역으로 유도하면 전두엽 피질과 편도체 간의 신경 연결망이 재조정되어, 전두엽이 편도체의 과도한 불안 신호를 감쇄시키는 억제성 제어력을 회복하게 됩니다.</p>
-                    <h4>3. 심리 생리학적 회복탄력성 확보</h4>
-                    <p>하루 20분간 사운드 믹서 기반의 음향 이완을 시행할 경우, 신체의 자율신경계 균형 수치인 심박변이도(HRV)의 고주파(HF) 성분이 상승합니다. 이는 부교감 신경의 톤이 강해졌음을 시사하며, 외부 자극에 대해 순간적으로 과도한 스트레스 반응을 일으키지 않는 심리적 안전지대(Window of Tolerance)를 넓혀주는 생리학적 기반을 제공합니다.</p>
-                </div>
-            </div>
-
+                document.write(articles.map(art => `
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>숲의 글 ${art.title}</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p>${art.body}</p>
+                        </div>
+                    </div>
+                `).join(''));
+            </script>
         </div>
 
         <!-- 하단 광고 영역 -->
@@ -439,10 +409,9 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <!-- 푸터 -->
         <footer>
             <p>© 2026 Forest Mind. All rights reserved.</p>
-            <p style="margin-top: 8px;">
+            <p style="margin-top: 6px;">
                 <a href="#" onclick="openModal('privacy')">개인정보처리방침</a> | 
                 <a href="#" onclick="openModal('terms')">이용약관</a> | 
                 <a href="#" onclick="openModal('contact')">문의하기</a>
@@ -450,7 +419,7 @@
         </footer>
     </div>
 
-    <!-- 모달 창 -->
+    <!-- 모달 -->
     <div id="modal-box" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
@@ -459,47 +428,34 @@
     </div>
 
     <script>
-        /* Web Audio API 사운드 제어 */
-        let audioCtx = null;
-        let binauralOscL = null;
-        let binauralOscR = null;
-        let gainBinaural = null;
-        let gainRain = null;
-        let gainFire = null;
-        let rainNode = null;
-        let fireNode = null;
-        let isPlaying = false;
+        let audioCtx = null, binauralOscL = null, binauralOscR = null;
+        let gainBinaural = null, gainRain = null, gainFire = null;
+        let rainNode = null, fireNode = null, isPlaying = false;
 
         function initAudio() {
             if (audioCtx) return;
-
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             audioCtx = new AudioContext();
 
-            // 1. 바이노럴 비트 (200Hz / 206Hz => 6Hz 테타파)
             const merg = audioCtx.createChannelMerger(2);
-            
             binauralOscL = audioCtx.createOscillator();
             binauralOscR = audioCtx.createOscillator();
             binauralOscL.frequency.value = 200;
             binauralOscR.frequency.value = 206;
 
             gainBinaural = audioCtx.createGain();
-            
-            binauralOscL.connect(merg, 0, 0); // 좌측 귀
-            binauralOscR.connect(merg, 0, 1); // 우측 귀
+            binauralOscL.connect(merg, 0, 0);
+            binauralOscR.connect(merg, 0, 1);
             merg.connect(gainBinaural);
             gainBinaural.connect(audioCtx.destination);
-
             binauralOscL.start();
             binauralOscR.start();
 
-            // 2. 핑크 노이즈 (빗소리 구현)
+            // 핑크 노이즈
             const bufferSize = audioCtx.sampleRate * 2;
             const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
             const output = noiseBuffer.getChannelData(0);
             let b0=0, b1=0, b2=0, b3=0, b4=0, b5=0, b6=0;
-
             for (let i = 0; i < bufferSize; i++) {
                 let white = Math.random() * 2 - 1;
                 b0 = 0.99886 * b0 + white * 0.0555179;
@@ -512,7 +468,6 @@
                 output[i] *= 0.11;
                 b6 = white * 0.115926;
             }
-
             rainNode = audioCtx.createBufferSource();
             rainNode.buffer = noiseBuffer;
             rainNode.loop = true;
@@ -521,18 +476,16 @@
             gainRain.connect(audioCtx.destination);
             rainNode.start();
 
-            // 3. 브라운 노이즈 (장작소리 기반)
+            // 브라운 노이즈
             const brownBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
             const brownOut = brownBuffer.getChannelData(0);
             let lastOutput = 0.0;
-
             for (let i = 0; i < bufferSize; i++) {
                 let white = Math.random() * 2 - 1;
                 brownOut[i] = (lastOutput + (0.02 * white)) / 1.02;
                 lastOutput = brownOut[i];
                 brownOut[i] *= 3.5;
             }
-
             fireNode = audioCtx.createBufferSource();
             fireNode.buffer = brownBuffer;
             fireNode.loop = true;
@@ -545,13 +498,8 @@
         }
 
         function toggleAudio() {
-            if (!audioCtx) {
-                initAudio();
-            }
-
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (!audioCtx) initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
 
             const btn = document.getElementById('play-toggle');
             if (isPlaying) {
@@ -569,7 +517,6 @@
 
         function updateVolume() {
             if (!audioCtx || !isPlaying) return;
-
             const v1 = document.getElementById('vol-binaural').value / 100;
             const v2 = document.getElementById('vol-rain').value / 100;
             const v3 = document.getElementById('vol-fire').value / 100;
@@ -583,31 +530,23 @@
             gainFire.gain.setValueAtTime(v3 * 0.15, audioCtx.currentTime);
         }
 
-        /* 프리셋 버튼 조절 */
         function setPreset(type) {
             document.querySelectorAll('.btn-grid .btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
-
             const s1 = document.getElementById('vol-binaural');
             const s2 = document.getElementById('vol-rain');
             const s3 = document.getElementById('vol-fire');
 
-            if (type === 'relax') {
-                s1.value = 60; s2.value = 50; s3.value = 20;
-            } else if (type === 'burnout') {
-                s1.value = 30; s2.value = 70; s3.value = 60;
-            } else if (type === 'focus') {
-                s1.value = 80; s2.value = 20; s3.value = 10;
-            }
+            if (type === 'relax') { s1.value = 60; s2.value = 50; s3.value = 20; }
+            else if (type === 'burnout') { s1.value = 30; s2.value = 70; s3.value = 60; }
+            else if (type === 'focus') { s1.value = 80; s2.value = 20; s3.value = 10; }
             updateVolume();
         }
 
-        /* 슬라이더 수치 연동 */
-        document.getElementById('stress-slider').addEventListener('input', function(e) {
+        document.getElementById('stress-slider').addEventListener('input', e => {
             document.getElementById('stress-val').innerText = `${e.target.value} / 10`;
         });
 
-        /* 아코디언 열기/닫기 */
         function toggleAccordion(button) {
             const item = button.parentElement;
             const content = button.nextElementSibling;
@@ -625,18 +564,12 @@
             }
         }
 
-        /* 모달 시스템 */
         function openModal(type) {
             const modal = document.getElementById('modal-box');
             const body = document.getElementById('modal-body');
-            
-            if(type === 'privacy') {
-                body.innerHTML = `<h3>개인정보처리방침</h3><br><p>본 웹사이트는 사용자의 개인식별정보를 직접 저장하거나 수집하지 않습니다. 구글 애드센스 등 제3자 광고 서비스에 의해 쿠키가 사용될 수 있습니다.</p>`;
-            } else if(type === 'terms') {
-                body.innerHTML = `<h3>이용약관</h3><br><p>본 사이트에서 제공하는 사운드 및 뇌과학 아티클은 정보 제공 및 심리적 이완 목적이며, 의료적 치료를 대신할 수 없습니다.</p>`;
-            } else if(type === 'contact') {
-                body.innerHTML = `<h3>문의하기</h3><br><p>사이트 이용 및 제휴 관한 문의 사항은 아래 이메일로 연락해 주시기 바랍니다.</p><br><p><strong>이메일:</strong> storytown77@gmail.com</p>`;
-            }
+            if(type === 'privacy') body.innerHTML = `<h3>개인정보처리방침</h3><br><p>사용자의 개인정보를 저장하지 않습니다.</p>`;
+            else if(type === 'terms') body.innerHTML = `<h3>이용약관</h3><br><p>의료적 목적이 아닌 이완 목적의 서비스입니다.</p>`;
+            else if(type === 'contact') body.innerHTML = `<h3>문의하기</h3><br><p>이메일: storytown77@gmail.com</p>`;
             modal.style.display = 'flex';
         }
 
