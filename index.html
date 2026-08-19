@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숲속으로... | 마음 이완 & 앰비언트 사운드</title>
+    <style>
+        :root {
+            --card-bg: rgba(18, 38, 35, 0.75);
+            --primary: #52b788;
+            --accent: #e9c46a;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --border: rgba(82, 183, 136, 0.3);
+        }
+
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: 'Pretendard', 'Segoe UI', system-ui, sans-serif;
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            background-color: #0d1b1e;
+        }
+
+        .bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.1);
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 30, 0.4);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-top: 10px;
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            margin: 0 0 8px;
+            color: var(--primary);
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+        }
+
+        header p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.95rem;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.7);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        .control-group { margin-bottom: 20px; }
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .btn-mood {
+            background: rgba(13, 27, 30, 0.6);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-mood.active, .btn-mood:hover {
+            background: rgba(82, 183, 136, 0.25);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .play-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent), #d4a373);
+            border: none;
+            color: #0d1b1e;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .play-btn:hover { transform: scale(1.02); }
+
+        .adsense-box {
+            border: 1px dashed var(--border);
+            background: rgba(13, 27, 30, 0.5);
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-radius: 8px;
+            margin: 20px 0;
+            backdrop-filter: blur(6px);
+        }
+
+        /* 아코디언 블로그 섹션 */
+        .blog-section { margin-top: 30px; }
+        
+        .blog-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .blog-header {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blog-header h3 {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+
+        .blog-header .icon {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: transform 0.3s;
+        }
+
+        .blog-card.active .blog-header .icon {
+            transform: rotate(180deg);
+        }
+
+        .blog-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            padding: 0 15px;
+            background: rgba(13, 27, 30, 0.4);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .blog-card.active .blog-content {
+            padding: 15px;
+            max-height: 1000px; /* 펼쳐질 때 높이 */
+            border-top: 1px dashed var(--border);
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #162a2d;
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            color: var(--text-main);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<video class="bg-video" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80">
+    <source src="https://cdn.pixabay.com/video/2020/05/25/40149-424930066_large.mp4" type="video/mp4">
+</video>
+<div class="bg-overlay"></div>
+
+<div class="container">
+    <header>
+        <h1>숲속으로...</h1>
+        <p>복잡한 마음을 잠시 내려놓는 뇌파 & 자연 소리 휴식 공간</p>
+    </header>
+
+    <!-- 1. 사용자 인터페이스: 스트레스 지수 및 모드 선택 -->
+    <div class="card">
+        <div class="card-title">마음 상태 설정</div>
+        
+        <div class="control-group">
+            <div class="control-label">
+                <span>현재 스트레스 지수</span>
+                <span id="stressVal" style="color: var(--primary); font-weight: bold;">7 / 10</span>
+            </div>
+            <input type="range" id="stressInput" min="1" max="10" value="7">
+        </div>
+
+        <div class="control-group">
+            <div class="control-label"><span>필요한 휴식 모드</span></div>
+            <div class="btn-group">
+                <button class="btn-mood active" onclick="setMood('calm', this)">불안 진정</button>
+                <button class="btn-mood" onclick="setMood('burnout', this)">번아웃 회복</button>
+                <button class="btn-mood" onclick="setMood('focus', this)">깊은 몰입</button>
+            </div>
+        </div>
+
+        <button id="playBtn" class="play-btn">🌲 숲속으로 데려다 주는 사운드</button>
+    </div>
+
+    <!-- 구글 애드센스 상단 광고 영역 -->
+    <div class="adsense-box">
+        [ Google AdSense Display Ad Area ]
+    </div>
+
+    <!-- 2. 개별 사운드 볼륨 믹서 -->
+    <div class="card">
+        <div class="card-title">실시간 앰비언트 믹서</div>
+        
+        <div class="control-group">
+            <div class="control-label">
+                <span>바이노럴 비트 (<span id="hzDisplay">6Hz 테타파</span>)</span>
+                <span id="binVolVal">60%</span>
+            </div>
+            <input type="range" id="binVol" min="0" max="100" value="60">
+        </div>
+
+        <div class="control-group">
+            <div class="control-label">
+                <span>숲속 빗소리 (Pink Noise)</span>
+                <span id="rainVolVal">70%</span>
+            </div>
+            <input type="range" id="rainVol" min="0" max="100" value="70">
+        </div>
+
+        <div class="control-group">
+            <div class="control-label">
+                <span>타오르는 장작 소리 (Warm Crackle)</span>
+                <span id="fireVolVal">30%</span>
+            </div>
+            <input type="range" id="fireVol" min="0" max="100" value="30">
+        </div>
+    </div>
+
+    <!-- 구글 애드센스 하단 광고 영역 -->
+    <div class="adsense-box">
+        [ Google AdSense Display Ad Area ]
+    </div>
+
+    <!-- 3. 아코디언 형태의 25개 전문 심리학 칼럼 -->
+    <div class="blog-section">
+        <div class="card-title">숲의 글 (뇌과학 & 심리학 전문 아티클)</div>
+        <div id="accordionContainer"></div>
+    </div>
+
+    <!-- 4. 법적 필수 푸터 -->
+    <footer>
+        <div class="footer-links">
+            <a onclick="openModal('privacy')">개인정보처리방침</a> |
+            <a onclick="openModal('terms')">이용약관</a> |
+            <a onclick="openModal('about')">소개</a> |
+            <a onclick="openModal('contact')">문의</a>
+        </div>
+        <div>© 2026 숲속으로... All rights reserved.</div>
+    </footer>
+</div>
+
+<!-- 모달 팝업 -->
+<div id="legalModal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h2 id="modalTitle" style="color: var(--primary); margin-top: 0;"></h2>
+        <div id="modalBody" style="line-height: 1.6; font-size: 0.9rem; color: var(--text-muted);"></div>
+    </div>
+</div>
+
+<script>
+    // 1. 오디오 로직 & 상태 연동
+    let audioCtx, oscLeft, oscRight, gainBin, gainRain, gainFire;
+    let isPlaying = false;
+    let currentHz = 6;
+
+    const playBtn = document.getElementById('playBtn');
+    const stressInput = document.getElementById('stressInput');
+    const stressVal = document.getElementById('stressVal');
+    const hzDisplay = document.getElementById('hzDisplay');
+
+    const binVol = document.getElementById('binVol');
+    const rainVol = document.getElementById('rainVol');
+    const fireVol = document.getElementById('fireVol');
+
+    // 스트레스 지수에 따른 자동 사운드 계산 로직
+    stressInput.addEventListener('input', (e) => {
+        const val = parseInt(e.target.value);
+        stressVal.textContent = `${val} / 10`;
+
+        // 스트레스가 높을수록 낮고 완만한 테타파(4~6Hz)와 높은 빗소리 비율 설정
+        if (val >= 8) {
+            currentHz = 4;
+            hzDisplay.textContent = "4Hz 깊은 테타파";
+            binVol.value = 80;
+            rainVol.value = 90;
+            fireVol.value = 20;
+        } else if (val >= 5) {
+            currentHz = 6;
+            hzDisplay.textContent = "6Hz 완만 테타파";
+            binVol.value = 60;
+            rainVol.value = 70;
+            fireVol.value = 40;
+        } else {
+            currentHz = 10;
+            hzDisplay.textContent = "10Hz 안정 알파파";
+            binVol.value = 40;
+            rainVol.value = 50;
+            fireVol.value = 60;
+        }
+
+        updateSlidersText();
+        if (isPlaying) updateAudioParams();
+    });
+
+    function setMood(mood, btn) {
+        document.querySelectorAll('.btn-mood').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (mood === 'calm') {
+            stressInput.value = 8;
+        } else if (mood === 'burnout') {
+            stressInput.value = 5;
+        } else if (mood === 'focus') {
+            stressInput.value = 2;
+        }
+        stressInput.dispatchEvent(new Event('input'));
+    }
+
+    function updateSlidersText() {
+        document.getElementById('binVolVal').textContent = `${binVol.value}%`;
+        document.getElementById('rainVolVal').textContent = `${rainVol.value}%`;
+        document.getElementById('fireVolVal').textContent = `${fireVol.value}%`;
+    }
+
+    [binVol, rainVol, fireVol].forEach(input => {
+        input.addEventListener('input', () => {
+            updateSlidersText();
+            if (isPlaying) updateAudioParams();
+        });
+    });
+
+    function updateAudioParams() {
+        if (!audioCtx) return;
+        const now = audioCtx.currentTime;
+        oscLeft.frequency.setValueAtTime(200, now);
+        oscRight.frequency.setValueAtTime(200 + currentHz, now);
+        gainBin.gain.setValueAtTime((binVol.value / 100) * 0.2, now);
+    }
+
+    playBtn.addEventListener('click', () => {
+        if (!isPlaying) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = audioCtx.currentTime;
+
+            oscLeft = audioCtx.createOscillator();
+            oscRight = audioCtx.createOscillator();
+            gainBin = audioCtx.createGain();
+
+            const panLeft = audioCtx.createStereoPanner();
+            const panRight = audioCtx.createStereoPanner();
+            panLeft.pan.setValueAtTime(-1, now);
+            panRight.pan.setValueAtTime(1, now);
+
+            oscLeft.connect(panLeft).connect(gainBin);
+            oscRight.connect(panRight).connect(gainBin);
+            gainBin.connect(audioCtx.destination);
+
+            updateAudioParams();
+
+            oscLeft.start();
+            oscRight.start();
+
+            playBtn.textContent = '⏸ 잠시 소리 멈추기';
+            playBtn.style.background = '#2d4a4e';
+            playBtn.style.color = '#fff';
+            isPlaying = true;
+        } else {
+            if (audioCtx) audioCtx.close();
+            playBtn.textContent = '🌲 숲속으로 데려다 주는 사운드';
+            playBtn.style.background = 'linear-gradient(135deg, var(--accent), #d4a373)';
+            playBtn.style.color = '#0d1b1e';
+            isPlaying = false;
+        }
+    });
+
+    // 2. 아코디언 데이터 (숲의 글 25개 동적 생성)
+    const articles = [
+        { title: "숲의 글 01. 바이노럴 비트의 뇌파 동기화 메커니즘", text: "양쪽 귀에 주파수가 미세하게 다른 두 소리를 들려주면 뇌는 그 차이에 해당하는 주파수(예: 6Hz)를 생성해 뇌파를 유도합니다. 이를 통해 신체 이완 및 코르티솔 수치 감소를 유도할 수 있습니다." },
+        { title: "숲의 글 02. 숲속 음향 스펙트럼과 핑크 노이즈의 이완 효과", text: "자연의 빗소리와 나뭇잎 흔들림은 1/f 고유 주파수 분포를 가집니다. 뇌는 이 규칙적이면서도 부드러운 자극에서 편안함을 느끼며 억제성 신경전달물질인 GABA 분비를 촉진합니다." },
+        { title: "숲의 글 03. 스트레스 완화를 위한 알파파 및 테타파 유도", text: "스트레스 상태의 교감신경 항진을 완화하기 위해 4~8Hz 대역의 테타파를 청각적으로 자극함으로써 자율신경계 균형과 심박변이도(HRV)를 안정시킵니다." },
+        { title: "숲의 글 04. 피토치드와 자연 소리가 뇌 인지 기능에 미치는 영향", text: "청각적 숲소리와 미각/청각 신경 결합 자극은 전두엽 피질의 산소 소비를 줄여 뇌 피로를 즉각적으로 줄여줍니다." },
+        { title: "숲의 글 05. 현대인의 만성 수면 장애를 해결하는 백색소음 치료", text: "각 수면 단계에 적합한 뇌파 자극은 서파 수면(깊은 수면) 진입 시간을 줄이고 밤중 깨는 빈도를 낮춥니다." },
+        { title: "숲의 글 06. 자율신경계 균형과 교감신경 억제 음향학", text: "높은 톤의 외부 소음을 차단하고 낮은 톤의 앰비언트 사운드를 지속적으로 들을 때 부교감신경이 우위를 점하게 됩니다." },
+        { title: "숲의 글 07. 디지털 피로와 뇌 휴식: 멍때리기의 뇌과학", text: "뇌의 기본모드네트워크(DMN)를 활성화하면 정보 처리 모드에서 벗어나 기억을 정리하고 창의성을 충전하게 됩니다." },
+        { title: "숲의 글 08. 주의집중력 향상을 위한 감각 차단 기술", text: "잡음을 상쇄하는 핑크 노이즈 기반 환경음은 몰입 상태(Flow)에 들어가는 데 필요한 뇌의 집중 에너지를 보전합니다." },
+        { title: "숲의 글 09. 번아웃 증후군 극복을 위한 심리 이완 명상", text: "신체 감각에 집중하는 정념 명상과 저주파 뇌파음을 병행할 때 정서적 고갈 상태가 빠르게 회복됩니다." },
+        { title: "숲의 글 10. 코르티솔 호르몬 조절과 음향 자극 분석", text: "임상 연구에 따르면 지속적인 자연 음향 청취는 부신피질 자극 호르몬 분비를 감소시키는 효과를 나타냅니다." },
+        { title: "숲의 글 11. 심박변이도(HRV) 개선을 위한 숲 소리 치유", text: "심장 박동 간격의 미세 변화 수치인 HRV는 이완 사운드를 듣는 동안 불규칙하고 건강한 패턴을 회복합니다." },
+        { title: "숲의 글 12. 공황장애 및 불안 진정을 위한 브레인웨이브 유도", text: "급성 불안 상황에서 낮고 신뢰감 있는 델타/테타 주파수는 편도체의 과잉 공포 반응을 억제합니다." },
+        { title: "숲의 글 13. 창의성 촉진을 위한 알파파 유도 전략", text: "8~12Hz의 알파파는 유연한 사고 방식과 우뇌 중심의 직관적 ไอ디어 발상을 자극하는 최적의 환경을 만듭니다." },
+        { title: "숲의 글 14. 감정 조절 장애 극복을 위한 앰비언트 테라피", text: "감정 수용체를 자극하는 잔잔한 음향 조율은 순간적인 감정 폭발 및 충동성을 누르는 데 유용합니다." },
+        { title: "숲의 글 15. 만성 통증 완화와 뇌파 조절 연구", text: "통증을 인지하는 대뇌 피질의 민감도를 낮추어 신체 통증 자극에 대한 반응을 완화할 수 있습니다." },
+        { title: "숲의 글 16. 깊은 수면을 위한 델타파 유도 솔루션", text: "1~3Hz 대역의 델타파 자극은 성장 호르몬 분비와 세포 재생이 원활한 수면 환경을 선사합니다." },
+        { title: "숲의 글 17. 업무 생산성 향상을 위한 소음 관리 가이드", text: "50dB 안팎의 규칙적인 자연 환경음은 삭막한 사무실 소음을 가려주는 최상의 자연 사운드 마스킹입니다." },
+        { title: "숲의 글 18. 신체 이완 반응을 유도하는 호흡 및 음향법", text: "4초 흡입, 7초 멈춤, 8초 호흡법과 6Hz 테타파 소리를 조화시키면 자율신경계가 안정화됩니다." },
+        { title: "숲의 글 19. 청각 자극이 뇌 신경가소성에 미치는 효과", text: "반복적인 이완음 청취는 스트레스에 저항하는 신경 회로망의 연결성을 강화해 주는 역할을 합니다." },
+        { title: "숲의 글 20. 자연 음향이 아동 및 청소년 불안 완화에 주는 효과", text: "학업 스트레스로 과열된 신경계를 부드러운 자연 소리로 감싸 인지 부하를 줄여주는 효과가 검증되었습니다." },
+        { title: "숲의 글 21. 명상 초보자를 위한 음향 가이드라인", text: "명상 중 잡념에 빠질 때 오디오의 빗소리나 바이노럴 톤에 다시 집중을 가져오는 앵커 역할을 수행합니다." },
+        { title: "숲의 글 22. 우울감 완화를 위한 뇌 신경전달물질 활성화", text: "우울 패턴에서 느려진 뇌 활성을 자극하여 세로토닌 유도 및 기분 전환을 돕습니다." },
+        { title: "숲의 글 23. 고주파/저주파 노이즈가 인지에 미치는 차이", text: "브라운 노이즈는 무겁고 깊은 휴식을, 핑크 노이즈는 집중에, 화이트 노이즈는 소음 상쇄에 특화되어 있습니다." },
+        { title: "숲의 글 24. 소리 감각 모달리티를 통한 마인드풀니스", text: "오직 귀로 들려오는 소리의 높낮이에 온 감각을 기울임으로써 잡념을 없애는 명상 기법입니다." },
+        { title: "숲의 글 25. 뇌 피로 회복을 위한 15분 음향 휴식 루틴", text: "하루 15분간 눈을 감고 앰비언트 믹서 사운드를 들으면 2시간의 가벼운 수면과 유사한 뇌 휴식을 선사합니다." }
+    ];
+
+    const container = document.getElementById('accordionContainer');
+    articles.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'blog-card';
+        card.innerHTML = `
+            <div class="blog-header" onclick="toggleAccordion(this)">
+                <h3>${item.title}</h3>
+                <span class="icon">▼</span>
+            </div>
+            <div class="blog-content">
+                <p>${item.text}</p>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+
+    function toggleAccordion(header) {
+        const card = header.parentElement;
+        const isActive = card.classList.contains('active');
+        document.querySelectorAll('.blog-card').forEach(c => c.classList.remove('active'));
+        if (!isActive) {
+            card.classList.add('active');
+        }
+    }
+
+    // 3. 법적 모달
+    const modalData = {
+        privacy: { title: "개인정보처리방침", content: "본 사이트는 개인정보 보호법을 준수하며 비식별 맞춤형 광고 구성을 위해 쿠키를 활용할 수 있습니다." },
+        terms: { title: "이용약관", content: "제공되는 모든 사운드 및 텍스트 칼럼은 무상으로 제공되며 상업적 무단 도용을 금지합니다." },
+        about: { title: "소개", content: "'숲속으로...'는 뇌과학 기반 앰비언트 사운드를 제공하는 힐링 플랫폼입니다." },
+        contact: { title: "문의", content: "문의 사항은 contact@forestmind.com 으로 연락해 주시기 바랍니다." }
+    };
+
+    function openModal(type) {
+        document.getElementById('modalTitle').innerText = modalData[type].title;
+        document.getElementById('modalBody').innerHTML = modalData[type].content;
+        document.getElementById('legalModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('legalModal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
