@@ -10,11 +10,11 @@
 
     <style>
         :root {
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.9);
             --accent-green: #27ae60;
             --text-dark: #1b3022;
-            --text-dim: #3a5343;
-            --border-color: rgba(39, 174, 96, 0.25);
+            --text-dim: #2c4435;
+            --border-color: rgba(39, 174, 96, 0.3);
         }
 
         * {
@@ -27,35 +27,30 @@
         body {
             background-color: #e8f0ec;
             color: var(--text-dark);
-            line-height: 1.7;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
-        /* 바람에 흔들리는 숲 비디오 배경 */
+        /* 숲 배경 비디오 */
         .video-background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             z-index: -1;
             overflow: hidden;
         }
 
         .video-background video {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
-            filter: brightness(1.1) contrast(0.95);
+            filter: brightness(1.05) contrast(0.95);
         }
 
         .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.15);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.2);
             z-index: -1;
         }
 
@@ -82,7 +77,6 @@
             color: #1c402e;
             font-size: 1.1rem;
             font-weight: 600;
-            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9);
         }
 
         .card {
@@ -96,24 +90,20 @@
         }
 
         .section-title {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 18px;
             color: #1e6b3c;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
         }
 
-        .control-group {
-            margin-bottom: 18px;
-        }
+        .control-group { margin-bottom: 18px; }
 
         .control-label {
             display: flex;
             justify-content: space-between;
             margin-bottom: 6px;
-            font-size: 0.95rem;
             font-weight: 600;
         }
 
@@ -141,15 +131,12 @@
             padding: 12px;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
             font-weight: 600;
         }
 
-        .btn:hover, .btn.active {
+        .btn.active {
             background: var(--accent-green);
             color: #ffffff;
-            border-color: var(--accent-green);
         }
 
         .main-play-btn {
@@ -162,13 +149,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
-            transition: transform 0.2s;
-            margin-top: 10px;
-        }
-
-        .main-play-btn:hover {
-            transform: translateY(-2px);
+            margin-top: 15px;
         }
 
         .ad-container {
@@ -177,54 +158,32 @@
             min-height: 90px;
         }
 
-        .accordion-item {
-            border-bottom: 1px solid var(--border-color);
+        /* 칼럼 아티클 스타일 */
+        .article-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
         }
 
-        .accordion-item:last-child {
+        .article-item:last-child {
             border-bottom: none;
         }
 
-        .accordion-header {
-            width: 100%;
-            background: none;
-            border: none;
-            padding: 16px 8px;
-            text-align: left;
-            color: var(--text-dark);
-            font-size: 1.02rem;
+        .article-title {
+            font-size: 1.15rem;
             font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: color 0.2s;
+            color: #1e6b3c;
+            margin-bottom: 10px;
         }
 
-        .accordion-header:hover {
-            color: var(--accent-green);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            padding: 0 8px;
+        .article-content {
             color: var(--text-dim);
-            font-size: 0.95rem;
-            line-height: 1.8;
+            font-size: 0.98rem;
+            text-align: justify;
         }
 
-        .accordion-content p {
-            margin-bottom: 12px;
-        }
-
-        .arrow {
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-item.active .arrow {
-            transform: rotate(180deg);
+        .article-content p {
+            margin-bottom: 8px;
         }
 
         footer {
@@ -241,33 +200,6 @@
             color: #2b4c38;
             text-decoration: none;
             margin: 0 10px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
-            color: var(--text-dark);
-        }
-
-        .modal-close {
-            float: right;
-            cursor: pointer;
-            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -340,47 +272,186 @@
             </div>
         </div>
 
+        <!-- 전문 칼럼 22선 본문 전체 직접 수록 -->
         <div class="card">
             <div class="section-title">📚 숲의 글 (뇌과학 & 심리학 전문 칼럼 22선)</div>
 
-            <script>
-                const articles = [
-                    { title: "01. 바이노럴 비트의 뇌파 동기화 메커니즘", body: "인간의 뇌는 외부 청각 자극에 반응하여 주파수를 맞추는 주파수 추종 응답(FFR) 생리 현상을 가집니다. 양쪽 귀에 미세하게 다른 주파수를 들려줄 때 뇌간 상올리브 핵에서 동기화 신호를 생성하여 알파파 및 테타파 유도를 돕습니다." },
-                    { title: "02. 자연 음향 스펙트럼과 핑크 노이즈의 이완 생리학", body: "숲의 빗소리와 나뭇잎 소리는 1/f 주파수 특성을 지닌 핑크 노이즈입니다. 이는 신체의 심박변이도(HRV) 수치와 수학적으로 동기화되어 교감신경을 안정시키고 깊은 수면 상태를 만듭니다." },
-                    { title: "03. 스트레스 완화를 위한 알파파 및 테타파 유도 기전", body: "만성 스트레스는 편도체를 과활성화시킵니다. 6Hz 대역의 테타파 음향은 대뇌 피질의 고주파 신호를 저온화하여 코르티솔 분비를 줄이고 신경적 안정감을 제공합니다." },
-                    { title: "04. 숲 치료(Forest Therapy)가 자율신경계에 미치는 영향", body: "삼림욕 환경은 NK세포(자연살해세포)의 활성도를 높이고 부교감신경계를 활성화합니다. 음향 사운드는 이러한 숲의 생리적 이점을 뇌에 직접 전달합니다." },
-                    { title: "05. 바이노럴 비트 청취 시 가바(GABA) 및 세로토닌의 변화", body: "뇌파 동기화 자극은 억제성 신경전달물질인 GABA의 분비를 촉진하고 세로토닌 합성을 도와 불안감과 정서적 불균형을 신속하게 완화시킵니다." },
-                    { title: "06. 현대인의 번아웃 증후군과 뇌 피로 회복 기전", body: "지속적인 정보 과부하는 디폴트 모드 네트워크(DMN)를 과열시킵니다. 단일 앰비언트 음향은 DMN의 불필요한 활성화를 막아 심층적 휴식을 제공합니다." },
-                    { title: "07. 청각 자극을 통한 수면 구조 개선과 서파 수면", body: "수면 전 핑크 노이즈 청취는 N3 단계의 델타파 깊은 수면 진입 속도를 촉진하며 수면 중 깨어남(Arousal)을 크게 방지합니다." },
-                    { title: "08. 피톤치드 향과 숲 사운드의 다감각 심리 이완", body: "시각 및 청각적 자연 자극이 통합될 때 전두엽 피질의 산소 소비량이 감소하여 뇌의 휴식 반응이 극대화됩니다." },
-                    { title: "09. 6Hz 테타파와 창의적 사고 및 기억력 정돈", body: "테타파 대역은 무의식적 아이디어 결합과 장기 기억 단단화(Consolidation)가 활발히 일어나는 상위 인지 상태입니다." },
-                    { title: "10. 불면증 개선을 위한 백색소음 vs 핑크소음 심층 비교", body: "고주파 에너지가 강한 백색소음보다 주파수가 높아질수록 감쇄하는 핑크소음이 수면 유지 및 심박 안정에 훨씬 효과적입니다." },
-                    { title: "11. 편도체(Amygdala) 안정화를 통한 불안 장애 조절", body: "음향 치료는 공포 자극에 민감한 편도체의 과반응성을 억제하여 심리적 안정 구역(Window of Tolerance)을 넓혀줍니다." },
-                    { title: "12. 만성 통증 완화에 대한 음향 유도 알파파의 임상 효과", body: "알파파 유도는 뇌의 통증 게이트 조절 이론에 따라 신체적 통증 자극 인지를 완화하는 보조적 효과를 가집니다." },
-                    { title: "13. 모노럴 비트와 바이노럴 비트의 신경학적 차이점", body: "모노럴 비트는 외부에서 합성된 주파수를 듣는 방식이지만, 바이노럴 비트는 양이청 반응을 통해 뇌 내부에서 직접 신호를 생성합니다." },
-                    { title: "14. 집중력 향상을 위한 베타파 및 감마파 동기화 활용법", body: "고도의 작업이나 공부가 필요한 경우 14~30Hz 베타파 자극을 통해 좌전두엽의 인지 자원 배분을 최적화할 수 있습니다." },
-                    { title: "15. 미경신경 자극(VNS)과 부교감 신경의 리듬 회복", body: "자연 음향 사운드는 미경신경의 톤을 높여 호흡을 완만하게 하고 신체 이완 및 소화기계의 활성화를 돕습니다." },
-                    { title: "16. 숲속 장작소리(Brown Noise)의 이완 및 불안 해소 원리", body: "저주파 에너지가 풍부한 브라운 노이즈는 뇌의 보호적 청각 장벽을 형성하여 시끄러운 환경 소음을 차단하고 안정감을 줍니다." },
-                    { title: "17. 주의집중력 결핍(ADHD) 완화를 위한 청각 마스킹 효과", body: "일정한 자연음 레이어링은 불규칙한 환경 소음을 덮어주어 인지적 산만함을 최소화하고 장시간 몰입을 유지해 줍니다." },
-                    { title: "18. 공황발작 및 긴급 불안 시 청각 이완법의 작용 기전", body: "급성 불안 상황에서 깊은 호흡음과 6Hz 소리를 함께 들으면 교감신경의 과도한 아드레날린 분비를 신속히 차단합니다." },
-                    { title: "19. 뇌가 느끼는 자연 소리의 진화심리학적 접근", body: "원시 인류에게 잔잔한 빗소리와 나뭇잎 소리는 '포식자가 없는 안전한 상태'를 뜻하는 신호로 유전자에 기각되어 있습니다." },
-                    { title: "20. 심박변이도(HRV) 향상을 위한 사운드 테라피의 실제", body: "주기적인 앰비언트 음향 청취는 HRV 지표 중 고주파(HF) 성분을 높여 심혈관계 전반의 건강성을 강화합니다." },
-                    { title: "21. 명상 및 요가 시 바이노럴 비트 결합의 시너지 효과", body: "호흡 명상과 테타파 사운드를 병행하면 단순 명상 대비 트랜스(Trance) 이완 상태에 도달하는 시간이 50% 이상 단축됩니다." },
-                    { title: "22. 디스플레이 화면의 생태적 visual 요소와 사운드의 결합", body: "움직이는 숲 비디오 시각 자극과 자연 앰비언트 사운드의 결합은 대뇌 시각피질과 청각피질의 동시 이완을 유도합니다." }
-                ];
+            <div class="article-item">
+                <div class="article-title">01. 바이노럴 비트의 뇌파 동기화 메커니즘</div>
+                <div class="article-content">
+                    <p>인간의 뇌는 외부 청각 자극에 반응하여 주파수를 맞추는 주파수 추종 응답(Frequency Following Response, FFR) 메커니즘을 가지고 있습니다. 양쪽 귀에 서로 다른 주파수의 음향을 들려줄 때, 뇌간의 상올리브 핵에서는 두 주파수의 차이에 해당하는 인공적인 비트 신호를 생성하게 됩니다.</p>
+                    <p>예를 들어 왼쪽 귀에 200Hz, 오른쪽 귀에 206Hz를 들려주면 대뇌 피질은 6Hz 대역의 테타파 신호로 인지하게 됩니다. 이러한 청각적 동기화 현상은 뇌의 불필요한 고주파 활성도를 저하시키고 깊은 명상 및 불안 완화 상태로 이끄는 데 생리학적인 유용성을 제공합니다.</p>
+                </div>
+            </div>
 
-                document.write(articles.map(art => `
-                    <div class="accordion-item">
-                        <button class="accordion-header" onclick="toggleAccordion(this)">
-                            <span>숲의 글 ${art.title}</span>
-                            <span class="arrow">▼</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>${art.body}</p>
-                        </div>
-                    </div>
-                `).join(''));
-            </script>
+            <div class="article-item">
+                <div class="article-title">02. 자연 음향 스펙트럼과 핑크 노이즈의 이완 생리학</div>
+                <div class="article-content">
+                    <p>숲에서 들려오는 잔잔한 빗소리와 나뭇잎이 흔들리는 소리는 주파수 에너지 분포가 1/f 특성을 나타내는 핑크 노이즈(Pink Noise)의 대표적 형태입니다. 핑크 노이즈는 고주파 영역으로 갈수록 에너지가 완만하게 감소하여 청각 신경에 부담을 주지 않는 특징을 갖습니다.</p>
+                    <p>임상 연구에 따르면 핑크 노이즈 자극은 심박변이도(HRV) 지표를 개선하고 부교감 신경계를 활성화하여 자율신경계의 균형을 맞추어 줍니다. 결과적으로 만성 피로와 스트레스성 긴장 상태를 자율적으로 완화하는 데 뛰어난 이완 효과를 유도합니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">03. 스트레스 완화를 위한 알파파 및 테타파 유도 기전</div>
+                <div class="article-content">
+                    <p>현대인이 겪는 대부분의 스트레스는 대뇌 피질의 베타파(14~30Hz) 과활성화와 밀접한 관련이 있습니다. 이러한 신경적 과열 상태는 코르티솔 분비를 촉진하고 전두엽의 인지적 유연성을 저하시킵니다.</p>
+                    <p>6Hz 대역의 테타파와 10Hz 대역의 알파파 바이노럴 음향은 뇌파의 진폭을 조절하여 공포와 불안을 담당하는 편도체(Amygdala)의 반응성을 낮춥니다. 지속적인 음향 청취는 뇌를 수면 전 단계나 심층 명상 상태와 유사하게 안정시켜 신경적 휴식을 선사합니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">04. 숲 치료(Forest Therapy)가 자율신경계에 미치는 영향</div>
+                <div class="article-content">
+                    <p>자연 환경과의 접촉은 자율신경계의 과도한 교감신경 긴장을 완화시키는 것으로 입증되었습니다. 삼림 환경에서 발산되는 청각적 음향과 시각적 요소는 혈압을 안정시키고 스트레스 호르몬 수치를 유의미하게 낮춥니다.</p>
+                    <p>디지털 매체를 통한 숲 사운드 청취 역시 뇌의 시각 및 청각 피질을 동시에 자극하여 가상의 숲 치료 효과를 전달합니다. 이는 도시 환경에서 유발되는 인지적 피로를 회복시키는 간접적 도구로 활용됩니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">05. 바이노럴 비트 청취 시 가바(GABA) 및 세로토닌의 변화</div>
+                <div class="article-content">
+                    <p>저주파 청각 동기화 자극은 신경전달물질의 분비 패턴에도 직접적인 변화를 유도합니다. 특히 억제성 신경전달물질인 가바(GABA)의 활성도를 증가시켜 과도하게 흥분된 신경망을 정돈합니다.</p>
+                    <p>동시에 감정 조절에 중요한 역할을 하는 세로토닌 분비를 촉진하여 우울감과 불안감을 완화합니다. 이로 인해 청취자는 외부 자극에 대한 정서적 내구성을 높이고 긴장감을 빠르게 회복할 수 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">06. 현대인의 번아웃 증후군과 뇌 피로 회복 기전</div>
+                <div class="article-content">
+                    <p>지속적인 시각 자극과 정보 과부하는 디폴트 모드 네트워크(DMN)를 과열시켜 번아웃 증후군을 유발합니다. 아무것도 하지 않을 때에도 뇌는 에너지를 과도하게 소비하게 됩니다.</p>
+                    <p>단일한 앰비언트 자연 사운드는 주의력을 과도하게 요구하지 않으면서도 잡념의 고리를 끊어주는 주의 회복 이론(Attention Restoration Theory)을 기반으로 작동합니다. 이를 통해 DMN의 불필요한 활성을 억제하고 뇌 피로를 체계적으로 회복시킵니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">07. 청각 자극을 통한 수면 구조 개선과 서파 수면</div>
+                <div class="article-content">
+                    <p>수면 장애는 뇌가 깊은 서파 수면(N3 단계)에 진입하지 못할 때 발생합니다. 입면 전 지속적인 핑크 노이즈 및 델타파 유도 사운드는 뇌파 리듬을 안정적인 동기화 상태로 전환합니다.</p>
+                    <p>이는 야간 중 돌발적인 외부 소음으로 인한 깨어남(Arousal) 현상을 줄이고, 수면의 질을 개선하여 아침에 느낄 수 있는 피로감을 획기적으로 낮춰줍니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">08. 피톤치드 향과 숲 사운드의 다감각 심리 이완</div>
+                <div class="article-content">
+                    <p>인간의 뇌는 단일 감각보다 다감각 자극이 결합될 때 더욱 강한 신체 반응을 일으킵니다. 시각적 녹색 이미지와 자연 음향이 결합하면 대뇌 전두엽의 혈류량이 안정화됩니다.</p>
+                    <p>이러한 다감각적 환경 조성은 뇌로 하여금 '안전한 환경'에 있다는 신호를 보내 부교감 신경의 톤을 높이고 생리적 안정감을 극대화합니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">09. 6Hz 테타파와 창의적 사고 및 기억력 정돈</div>
+                <div class="article-content">
+                    <p>테타파 대역(4~8Hz)은 무의식적인 아이디어의 결합과 정보 정돈이 일어나는 주파수 영역입니다. 고도의 인지 작업 중 적절한 테타파 자극은 논리적 억제를 완화하고 직관적 사고를 돕습니다.</p>
+                    <p>또한 해마(Hippocampus)의 단기 기억을 장기 기억으로 전환하는 공고화 과정을 지원하여 공부나 아이디어 구상 작업 시 작업 효율을 대폭 향상시킵니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">10. 불면증 개선을 위한 백색소음 vs 핑크소음 심층 비교</div>
+                <div class="article-content">
+                    <p>모든 주파수 대역이 동일한 에너지를 갖는 백색소음은 고주파 성분이 강해 장시간 청취 시 청각적 피로를 유발할 수 있습니다.</p>
+                    <p>반면, 옥타브당 에너지가 감쇄하는 핑크소음은 인간의 실제 청각 인지 특성과 일치하여 뇌에 부드러운 차음 효과(Sound Masking)를 제공합니다. 따라서 불면증 개선 및 수면 유지에는 핑크소음이 한층 더 생리적으로 적합합니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">11. 편도체(Amygdala) 안정화를 통한 불안 장애 조절</div>
+                <div class="article-content">
+                    <p>만성 불안 상태에 노출된 경우 편도체가 신체 위협 신호를 과도하게 해석하여 심박수 증가 및 호흡 가쁨 현상을 일으킵니다. 음향 치료는 편도체와 자율신경계 간의 비정상적 신호 전달을 저지합니다.</p>
+                    <p>규칙적인 앰비언트 음향 청취는 자율신경계 반응성을 완화하여 심리적 안정 영역(Window of Tolerance)을 넓히는 치료적 보조수단으로 기능합니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">12. 만성 통증 완화에 대한 음향 유도 알파파의 임상 효과</div>
+                <div class="article-content">
+                    <p>뇌의 통증 인지는 신체적 자극뿐만 아니라 전두엽의 주관적 해석에 따라 증폭됩니다. 알파파(8~12Hz) 유도는 통증 신호가 대뇌 피질로 전달되는 게이트 메커니즘을 부분적으로 조절합니다.</p>
+                    <p>연구에 따르면 음향 자극으로 알파파가 증가할 때 환자가 느끼는 주관적 통증 강도가 감소하고 통증으로 인한 정서적 불쾌감이 완화되는 효과가 관찰됩니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">13. 모노럴 비트와 바이노럴 비트의 신경학적 차이점</div>
+                <div class="article-content">
+                    <p>모노럴 비트는 공기 중에서 스피커를 통해 주파수가 합쳐진 소리를 듣는 방식이며, 뇌간의 활성화 수준이 상대적으로 낮습니다.</p>
+                    <p>반면 바이노럴 비트는 반드시 헤드폰이나 이어폰을 이용해 양 귀에 독립된 음향을 전달하여 뇌 내부에서 직접 신호를 생성하게 만듭니다. 결과적으로 중추신경계의 뇌파 동기화 효율 면에서 바이노럴 비트가 우수한 성과를 보입니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">14. 집중력 향상을 위한 베타파 및 감마파 동기화 활용법</div>
+                <div class="article-content">
+                    <p>단순 이완 외에도 높은 인지 자원이 필요한 작업에는 15~30Hz 대역의 중간 베타파 음향 자극이 효과적입니다.</p>
+                    <p>베타파 동기화는 좌전두엽의 주의집중 네트워크를 자극하여 작업 기억 능력을 고도화하고 외부 소음으로 인한 집중력 저하를 방지하는 실질적인 환경을 제공합니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">15. 미경신경 자극(VNS)과 부교감 신경의 리듬 회복</div>
+                <div class="article-content">
+                    <p>미경신경(Vagus Nerve)은 신체 부교감 신경계의 핵심 경로로, 호흡 및 심장 박동 조절에 직결됩니다. 저주파 자연 사운드는 미경신경의 톤을 높여 신체 이완을 빠르게 유도합니다.</p>
+                    <p>미경신경 활성도가 올라가면 소화 기능이 개선되고, 근육 긴장 완화 및 심박 안정화 등 전신적인 이완 반응이 신속하게 나타납니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">16. 숲속 장작소리(Brown Noise)의 이완 및 불안 해소 원리</div>
+                <div class="article-content">
+                    <p>브라운 노이즈는 핑크 노이즈보다 저주파 영역 에너지가 더 강하여 차분하고 깊은 울림을 제공합니다. 숲속의 장작 타는 소리가 이에 해당합니다.</p>
+                    <p>이 고유한 저주파 음향은 뇌의 보호적 청각 장벽을 형성하여 갑작스러운 고주파 불쾌 소음을 차단하고 포근한 심리적 경계감을 제공합니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">17. 주의집중력 결핍(ADHD) 완화를 위한 청각 마스킹 효과</div>
+                <div class="article-content">
+                    <p>주의력이 산만한 뇌는 작은 잔여 소음에도 민감하게 반응하여 주의 자원을 손실합니다. 일정한 핑크 노이즈 레이어링은 주변 소음을 덮어주는 효과를 제공합니다.</p>
+                    <p>이를 통해 청각 신경에 가해지는 자극의 변동성을 줄여 작업 및 학습 시 인지적 과부하를 예방하고 단일 작업 지속 시간을 연장시킵니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">18. 공황발작 및 긴급 불안 시 청각 이완법의 작용 기전</div>
+                <div class="article-content">
+                    <p>갑작스러운 급성 불안 상태에서는 교감신경의 과도한 아드레날린 분비로 인해 신체적 호흡 곤란과 가슴 답답함이 발생합니다.</p>
+                    <p>이때 저속의 6Hz 사운드에 맞춰 호흡 속도를 줄이면 혈중 이산화탄소 농도가 정상화되고 뇌로 가는 혈류가 개선되어 과호흡 신호를 차단하고 신속하게 불안을 진정시킵니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">19. 뇌가 느끼는 자연 소리의 진화심리학적 접근</div>
+                <div class="article-content">
+                    <p>원시 인류에게 잔잔한 빗소리나 나뭇잎 소리는 '포식자가 활동하기 어렵고 안전한 환경'이라는 신호로 인식되어 왔습니다.</p>
+                    <p>이러한 경험은 유전적 정보로 각인되어 현대인의 뇌에서도 잔잔한 자연음을 청취할 때 경계 태세를 풀고 자동적으로 안전감을 느끼는 본능적 반응을 일으킵니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">20. 심박변이도(HRV) 향상을 위한 사운드 테라피의 실제</div>
+                <div class="article-content">
+                    <p>심박변이도(HRV)는 자율신경계의 유연성과 신체적 건강도를 나타내는 주요 지표입니다. 낮은 HRV는 높은 스트레스 상태를 의미합니다.</p>
+                    <p>주기적인 앰비언트 음향 청취는 HRV의 고주파(HF) 성분을 향상시켜 자율신경계의 리듬 회복 능력을 다지고 심혈관계 건강 증진에 이바지합니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">21. 명상 및 요가 시 바이노럴 비트 결합의 시너지 효과</div>
+                <div class="article-content">
+                    <p>신체 이완을 돕는 요가 동작이나 명상 호흡에 바이노럴 비트 청취를 더하면 대뇌 알파파 및 테타파 유도가 촉진됩니다.</p>
+                    <p>단순 호흡 명상 대비 트랜스(Trance) 이완 상태에 도달하는 시간이 절반 수준으로 단축되어, 짧은 시간 내에 깊은 정신적 휴식을 취하도록 돕습니다.</p>
+                </div>
+            </div>
+
+            <div class="article-item">
+                <div class="article-title">22. 디스플레이 화면의 생태적 visual 요소와 사운드의 결합</div>
+                <div class="article-content">
+                    <p>움직이는 푸른 숲 동영상 자극과 자연 앰비언트 사운드의 결합은 시각피질과 청각피질을 동시에 안정시키는 통합적 효과를 발휘합니다.</p>
+                    <p>이러한 복합적 자극은 뇌 전체의 자극 인지 부담을 대폭 감소시켜 작업 집중 시 피로감을 최소화하고 전반적인 뇌 이완 효율을 극대화합니다.</p>
+                </div>
+            </div>
+
         </div>
 
         <div class="ad-container">
@@ -395,19 +466,7 @@
 
         <footer>
             <p>© 2026 Forest Mind. All rights reserved.</p>
-            <p style="margin-top: 6px;">
-                <a href="#" onclick="openModal('privacy')">개인정보처리방침</a> | 
-                <a href="#" onclick="openModal('terms')">이용약관</a> | 
-                <a href="#" onclick="openModal('contact')">문의하기</a>
-            </p>
         </footer>
-    </div>
-
-    <div id="modal-box" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div id="modal-body"></div>
-        </div>
     </div>
 
     <script>
@@ -527,36 +586,6 @@
         document.getElementById('stress-slider').addEventListener('input', e => {
             document.getElementById('stress-val').innerText = `${e.target.value} / 10`;
         });
-
-        function toggleAccordion(button) {
-            const item = button.parentElement;
-            const content = button.nextElementSibling;
-            
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-                content.style.maxHeight = null;
-            } else {
-                document.querySelectorAll('.accordion-item').forEach(i => {
-                    i.classList.remove('active');
-                    i.querySelector('.accordion-content').style.maxHeight = null;
-                });
-                item.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        }
-
-        function openModal(type) {
-            const modal = document.getElementById('modal-box');
-            const body = document.getElementById('modal-body');
-            if(type === 'privacy') body.innerHTML = `<h3>개인정보처리방침</h3><br><p>사용자의 개인정보를 저장하지 않습니다.</p>`;
-            else if(type === 'terms') body.innerHTML = `<h3>이용약관</h3><br><p>의료적 목적이 아닌 이완 목적의 서비스입니다.</p>`;
-            else if(type === 'contact') body.innerHTML = `<h3>문의하기</h3><br><p>이메일: storytown77@gmail.com</p>`;
-            modal.style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('modal-box').style.display = 'none';
-        }
     </script>
 </body>
 </html>
