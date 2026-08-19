@@ -15,17 +15,20 @@
 
     <style>
         :root {
-            --forest-deep: #163420;
-            --forest-mid: #2f5c40;
-            --moss: #5b8c62;
-            --gold: #e3ac5c;
-            --gold-soft: #f0c98a;
-            --cream: #fbf9f2;
-            --card-bg: rgba(251, 249, 242, 0.86);
-            --card-border: rgba(91, 140, 98, 0.28);
-            --text-dark: #17301f;
-            --text-dim: #3f5a46;
-            --shadow-soft: 0 14px 34px rgba(22, 52, 32, 0.14);
+            --forest-deep: #0f2718;
+            --forest-mid: #254d33;
+            --moss: #4a7c55;
+            --moss-light: #6b9e77;
+            --gold: #d99b3b;
+            --gold-light: #f7d695;
+            --gold-gradient: linear-gradient(135deg, #f3cd82 0%, #d49534 100%);
+            --cream: #fcfbfa;
+            --card-bg: rgba(255, 255, 255, 0.72);
+            --card-border: rgba(255, 255, 255, 0.6);
+            --text-dark: #122216;
+            --text-dim: #455e4e;
+            --shadow-soft: 0 20px 40px rgba(15, 39, 24, 0.08);
+            --shadow-hover: 0 12px 28px rgba(15, 39, 24, 0.15);
         }
 
         * {
@@ -33,10 +36,11 @@
             margin: 0;
             padding: 0;
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: #eef4ee;
+            background-color: #eaf1ea;
             color: var(--text-dark);
             line-height: 1.7;
             overflow-x: hidden;
@@ -51,14 +55,14 @@
             height: 100vh;
             z-index: -2;
             overflow: hidden;
-            background: linear-gradient(160deg, #dcecd9 0%, #b9d6bb 45%, #8fbb96 100%);
+            background: linear-gradient(160deg, #d2e4d0 0%, #a8cbaa 50%, #7fae87 100%);
         }
 
         .video-background video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(1.18) contrast(1.02) saturate(1.15);
+            filter: brightness(1.1) contrast(1.02) saturate(1.1);
         }
 
         .overlay {
@@ -67,172 +71,224 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background:
-                linear-gradient(180deg, rgba(255, 253, 240, 0.08) 0%, rgba(255, 255, 255, 0.14) 45%, rgba(255, 255, 255, 0.22) 100%);
+            background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.2) 0%, rgba(240, 247, 241, 0.4) 100%);
             z-index: -1;
         }
 
         .container {
-            max-width: 880px;
+            max-width: 860px;
             margin: 0 auto;
-            padding: 48px 20px 30px;
+            padding: 56px 20px 40px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 34px;
+            margin-bottom: 40px;
             position: relative;
         }
 
         .header-glow {
             position: absolute;
-            top: -60px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 340px;
-            height: 200px;
-            background: radial-gradient(ellipse at center, rgba(227, 172, 92, 0.35) 0%, rgba(227, 172, 92, 0) 70%);
+            width: 380px;
+            height: 220px;
+            background: radial-gradient(ellipse at center, rgba(217, 155, 59, 0.25) 0%, rgba(217, 155, 59, 0) 70%);
             z-index: -1;
             pointer-events: none;
         }
 
         .eyebrow {
             display: inline-block;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.22em;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
             color: var(--forest-mid);
-            background: rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.75);
             border: 1px solid var(--card-border);
-            padding: 5px 14px;
+            padding: 6px 16px;
             border-radius: 999px;
-            margin-bottom: 16px;
-            text-shadow: none;
+            margin-bottom: 18px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
         header h1 {
             font-family: 'Noto Serif KR', serif;
-            font-size: 2.5rem;
+            font-size: 2.75rem;
             font-weight: 900;
             color: var(--forest-deep);
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.85);
-            margin-bottom: 12px;
-            letter-spacing: -0.01em;
+            text-shadow: 0 2px 12px rgba(255, 255, 255, 0.9);
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
         }
 
         header p {
-            color: #244a32;
-            font-size: 1.08rem;
+            color: var(--text-dim);
+            font-size: 1.05rem;
             font-weight: 500;
-            text-shadow: 0 1px 6px rgba(255, 255, 255, 0.85);
-            max-width: 480px;
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
+            max-width: 520px;
             margin: 0 auto;
+            word-break: keep-all;
         }
 
         /* 카드 UI */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 30px;
-            margin-bottom: 25px;
+            border-radius: 24px;
+            padding: 34px 32px;
+            margin-bottom: 28px;
             box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .section-title {
             font-family: 'Noto Serif KR', serif;
-            font-size: 1.28rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             color: var(--forest-deep);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .section-sub {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             color: var(--text-dim);
             font-weight: 500;
-            margin-top: -14px;
-            margin-bottom: 20px;
+            margin-top: -16px;
+            margin-bottom: 24px;
         }
 
         .control-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .control-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-size: 0.95rem;
             font-weight: 600;
+            color: var(--forest-deep);
         }
 
+        /* 모던 커스텀 슬라이더 */
         input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
             width: 100%;
-            height: 6px;
-            background: #cddcd0;
-            border-radius: 3px;
+            height: 8px;
+            background: rgba(37, 77, 51, 0.12);
+            border-radius: 999px;
             outline: none;
-            accent-color: var(--moss);
             cursor: pointer;
+            transition: background 0.2s;
         }
 
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--moss);
+            border: 3px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            background: var(--forest-mid);
+        }
+
+        /* 버튼 그리드 & 스타일링 개편 */
         .btn-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 20px;
+            margin-bottom: 22px;
         }
 
         .btn {
-            background: #ffffff;
-            border: 1px solid var(--card-border);
-            color: var(--text-dark);
-            padding: 12px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            color: var(--forest-deep);
+            padding: 14px 10px;
+            border-radius: 14px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.92rem;
             font-weight: 600;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            text-align: center;
         }
 
-        .btn:hover, .btn.active {
-            background: var(--moss);
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 77, 51, 0.1);
+            color: var(--moss);
+        }
+
+        .btn.active {
+            background: var(--forest-mid);
             color: #ffffff;
-            border-color: var(--moss);
+            border-color: var(--forest-mid);
+            box-shadow: 0 8px 20px rgba(37, 77, 51, 0.25);
+            font-weight: 700;
         }
 
+        /* 메인 재생 버튼 */
         .main-play-btn {
             width: 100%;
-            padding: 17px;
-            background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+            padding: 18px;
+            background: var(--gold-gradient);
             border: none;
-            border-radius: 12px;
-            color: #2c1c05;
-            font-size: 1.08rem;
+            border-radius: 16px;
+            color: #2b1a03;
+            font-size: 1.12rem;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(227, 172, 92, 0.4);
-            transition: transform 0.2s;
-            margin-top: 10px;
+            box-shadow: 0 8px 24px rgba(217, 155, 59, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
         }
 
         .main-play-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(217, 155, 59, 0.45);
+            filter: brightness(1.03);
+        }
+
+        .main-play-btn:active {
+            transform: translateY(-1px);
         }
 
         .ad-container {
-            margin: 20px 0;
+            margin: 24px 0;
             text-align: center;
             min-height: 90px;
         }
 
+        /* 아코디언 스타일 */
         .accordion-item {
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid rgba(37, 77, 51, 0.08);
+            transition: background-color 0.2s ease;
         }
 
         .accordion-item:last-child {
@@ -243,33 +299,34 @@
             width: 100%;
             background: none;
             border: none;
-            padding: 18px 8px;
+            padding: 20px 8px;
             text-align: left;
             color: var(--text-dark);
-            font-size: 1.02rem;
+            font-size: 1.05rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             transition: color 0.2s;
         }
 
         .accordion-header:hover {
-            color: var(--forest-mid);
+            color: var(--moss);
         }
 
         .branch-tag {
             flex-shrink: 0;
             font-family: 'Noto Serif KR', serif;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: #ffffff;
-            background: var(--forest-mid);
-            padding: 3px 10px;
+            background: var(--moss);
+            padding: 4px 12px;
             border-radius: 999px;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
+            box-shadow: 0 2px 6px rgba(74, 124, 85, 0.2);
         }
 
         .accordion-title-text {
@@ -282,18 +339,19 @@
             transition: max-height 0.35s ease-out;
             padding: 0 8px;
             color: var(--text-dim);
-            font-size: 0.96rem;
+            font-size: 0.98rem;
             line-height: 1.85;
         }
 
         .accordion-content p {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .arrow {
             transition: transform 0.3s ease;
-            color: var(--forest-mid);
+            color: var(--moss);
             flex-shrink: 0;
+            font-size: 0.8rem;
         }
 
         .accordion-item.active .arrow {
@@ -302,18 +360,20 @@
 
         footer {
             text-align: center;
-            padding: 34px 0 20px;
-            color: #274a34;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-top: 1px solid var(--card-border);
+            padding: 40px 0 24px;
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            font-weight: 500;
+            border-top: 1px solid rgba(37, 77, 51, 0.1);
             margin-top: 40px;
         }
 
         footer a {
-            color: #274a34;
+            color: var(--forest-mid);
             text-decoration: none;
             margin: 0 10px;
+            font-weight: 600;
+            transition: color 0.2s;
         }
 
         footer a:hover {
@@ -325,7 +385,8 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(20, 40, 26, 0.55);
+            background: rgba(15, 39, 24, 0.6);
+            backdrop-filter: blur(6px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -334,29 +395,37 @@
         .modal-content {
             background: #ffffff;
             border: 1px solid var(--card-border);
-            padding: 26px;
-            border-radius: 14px;
+            padding: 32px;
+            border-radius: 20px;
             max-width: 500px;
             width: 90%;
             color: var(--text-dark);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
 
         .modal-content h3 {
             font-family: 'Noto Serif KR', serif;
             color: var(--forest-deep);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .modal-close {
             float: right;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text-dim);
+            transition: color 0.2s;
         }
 
-        @media (max-width: 480px) {
-            header h1 { font-size: 1.9rem; }
-            .card { padding: 22px; }
+        .modal-close:hover {
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 580px) {
+            header h1 { font-size: 2.1rem; }
+            .card { padding: 24px 20px; }
+            .btn-grid { grid-template-columns: 1fr; }
+            .main-play-btn { font-size: 1.05rem; padding: 16px; }
         }
     </style>
 </head>
@@ -403,7 +472,9 @@
                 <button class="btn" onclick="setPreset('focus')">깊은 몰입</button>
             </div>
 
-            <button class="main-play-btn" id="play-toggle" onclick="toggleAudio()">▶ 숲속 사운드 재생하기</button>
+            <button class="main-play-btn" id="play-toggle" onclick="toggleAudio()">
+                <span>▶</span> <span>숲속 사운드 재생하기</span>
+            </button>
         </div>
 
         <div class="card">
@@ -634,13 +705,12 @@
             binauralOscR.connect(merg, 0, 1);
             merg.connect(gainBinaural);
             gainBinaural.connect(audioCtx.destination);
-            binauralOscL.start();
-            binauralOscR.start();
 
+            // Pink Noise Node for Rain
             const bufferSize = audioCtx.sampleRate * 2;
-            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-            const output = noiseBuffer.getChannelData(0);
-            let b0=0, b1=0, b2=0, b3=0, b4=0, b5=0, b6=0;
+            const rainBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const output = rainBuffer.getChannelData(0);
+            let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
             for (let i = 0; i < bufferSize; i++) {
                 let white = Math.random() * 2 - 1;
                 b0 = 0.99886 * b0 + white * 0.0555179;
@@ -653,29 +723,35 @@
                 output[i] *= 0.11;
                 b6 = white * 0.115926;
             }
+
             rainNode = audioCtx.createBufferSource();
-            rainNode.buffer = noiseBuffer;
+            rainNode.buffer = rainBuffer;
             rainNode.loop = true;
             gainRain = audioCtx.createGain();
             rainNode.connect(gainRain);
             gainRain.connect(audioCtx.destination);
-            rainNode.start();
 
-            const brownBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-            const brownOut = brownBuffer.getChannelData(0);
+            // Brown Noise Node for Fire
+            const fireBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const fireOut = fireBuffer.getChannelData(0);
             let lastOutput = 0.0;
             for (let i = 0; i < bufferSize; i++) {
                 let white = Math.random() * 2 - 1;
-                brownOut[i] = (lastOutput + (0.02 * white)) / 1.02;
-                lastOutput = brownOut[i];
-                brownOut[i] *= 3.5;
+                fireOut[i] = (lastOutput + (0.02 * white)) / 1.02;
+                lastOutput = fireOut[i];
+                fireOut[i] *= 3.5;
             }
+
             fireNode = audioCtx.createBufferSource();
-            fireNode.buffer = brownBuffer;
+            fireNode.buffer = fireBuffer;
             fireNode.loop = true;
             gainFire = audioCtx.createGain();
             fireNode.connect(gainFire);
             gainFire.connect(audioCtx.destination);
+
+            binauralOscL.start();
+            binauralOscR.start();
+            rainNode.start();
             fireNode.start();
 
             updateVolume();
@@ -683,66 +759,74 @@
 
         function toggleAudio() {
             if (!audioCtx) initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
 
             const btn = document.getElementById('play-toggle');
             if (isPlaying) {
-                gainBinaural.gain.setValueAtTime(0, audioCtx.currentTime);
-                gainRain.gain.setValueAtTime(0, audioCtx.currentTime);
-                gainFire.gain.setValueAtTime(0, audioCtx.currentTime);
-                btn.innerText = "▶ 숲속 사운드 재생하기";
+                audioCtx.suspend();
+                btn.innerHTML = '<span>▶</span> <span>숲속 사운드 재생하기</span>';
                 isPlaying = false;
             } else {
-                updateVolume();
-                btn.innerText = "⏸ 잠시 소리 멈추기";
+                audioCtx.resume();
+                btn.innerHTML = '<span>❚❚</span> <span>사운드 일시정지</span>';
                 isPlaying = true;
             }
         }
 
         function updateVolume() {
-            if (!audioCtx || !isPlaying) return;
-            const v1 = document.getElementById('vol-binaural').value / 100;
-            const v2 = document.getElementById('vol-rain').value / 100;
-            const v3 = document.getElementById('vol-fire').value / 100;
+            if (!gainBinaural) return;
+            const vBinaural = document.getElementById('vol-binaural').value / 100;
+            const vRain = document.getElementById('vol-rain').value / 100;
+            const vFire = document.getElementById('vol-fire').value / 100;
 
-            document.getElementById('vol-binaural-text').innerText = `${Math.round(v1 * 100)}%`;
-            document.getElementById('vol-rain-text').innerText = `${Math.round(v2 * 100)}%`;
-            document.getElementById('vol-fire-text').innerText = `${Math.round(v3 * 100)}%`;
+            document.getElementById('vol-binaural-text').innerText = document.getElementById('vol-binaural').value + '%';
+            document.getElementById('vol-rain-text').innerText = document.getElementById('vol-rain').value + '%';
+            document.getElementById('vol-fire-text').innerText = document.getElementById('vol-fire').value + '%';
 
-            gainBinaural.gain.setValueAtTime(v1 * 0.15, audioCtx.currentTime);
-            gainRain.gain.setValueAtTime(v2 * 0.2, audioCtx.currentTime);
-            gainFire.gain.setValueAtTime(v3 * 0.15, audioCtx.currentTime);
+            gainBinaural.gain.setTargetAtTime(vBinaural * 0.15, audioCtx.currentTime, 0.05);
+            gainRain.gain.setTargetAtTime(vRain * 0.25, audioCtx.currentTime, 0.05);
+            gainFire.gain.setTargetAtTime(vFire * 0.2, audioCtx.currentTime, 0.05);
         }
 
         function setPreset(type) {
-            document.querySelectorAll('.btn-grid .btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.btn-grid .btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            const s1 = document.getElementById('vol-binaural');
-            const s2 = document.getElementById('vol-rain');
-            const s3 = document.getElementById('vol-fire');
 
-            if (type === 'relax') { s1.value = 60; s2.value = 50; s3.value = 20; }
-            else if (type === 'burnout') { s1.value = 30; s2.value = 70; s3.value = 60; }
-            else if (type === 'focus') { s1.value = 80; s2.value = 20; s3.value = 10; }
+            const sliderB = document.getElementById('vol-binaural');
+            const sliderR = document.getElementById('vol-rain');
+            const sliderF = document.getElementById('vol-fire');
+
+            if (type === 'relax') {
+                sliderB.value = 50; sliderR.value = 40; sliderF.value = 30;
+            } else if (type === 'burnout') {
+                sliderB.value = 30; sliderR.value = 60; sliderF.value = 50;
+            } else if (type === 'focus') {
+                sliderB.value = 70; sliderR.value = 20; sliderF.value = 10;
+            }
             updateVolume();
         }
 
-        document.getElementById('stress-slider').addEventListener('input', e => {
-            document.getElementById('stress-val').innerText = `${e.target.value} / 10`;
-        });
+        const stressSlider = document.getElementById('stress-slider');
+        if (stressSlider) {
+            stressSlider.addEventListener('input', (e) => {
+                document.getElementById('stress-val').innerText = e.target.value + ' / 10';
+            });
+        }
 
-        function toggleAccordion(button) {
-            const item = button.parentElement;
-            const content = button.nextElementSibling;
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const content = item.querySelector('.accordion-content');
+            const isActive = item.classList.contains('active');
 
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-                content.style.maxHeight = null;
-            } else {
-                document.querySelectorAll('.accordion-item').forEach(i => {
-                    i.classList.remove('active');
-                    i.querySelector('.accordion-content').style.maxHeight = null;
-                });
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('active');
+                el.querySelector('.accordion-content').style.maxHeight = null;
+            });
+
+            if (!isActive) {
                 item.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + "px";
             }
@@ -751,14 +835,26 @@
         function openModal(type) {
             const modal = document.getElementById('modal-box');
             const body = document.getElementById('modal-body');
-            if(type === 'privacy') body.innerHTML = `<h3>개인정보처리방침</h3><p>사용자의 개인정보를 저장하지 않습니다.</p>`;
-            else if(type === 'terms') body.innerHTML = `<h3>이용약관</h3><p>지친 심신의 안정을 돕기 위해 만든 힐링 사이트입니다.</p>`;
-            else if(type === 'contact') body.innerHTML = `<h3>문의하기</h3><p>이메일: ykjjho@naver.com</p>`;
             modal.style.display = 'flex';
+
+            if (type === 'privacy') {
+                body.innerHTML = '<h3>개인정보처리방침</h3><p style="font-size:0.9rem; color:#666;">본 사이트는 이용자의 개인정보를 수집하지 않으며, 구글 애드센스를 통한 제3자 쿠키가 활용될 수 있습니다.</p>';
+            } else if (type === 'terms') {
+                body.innerHTML = '<h3>이용약관</h3><p style="font-size:0.9rem; color:#666;">본 서비스에서 제공하는 오디오 및 콘텐츠는 이완 및 집중 보조용이며, 의학적 치료를 대체할 수 없습니다.</p>';
+            } else if (type === 'contact') {
+                body.innerHTML = '<h3>문의하기</h3><p style="font-size:0.9rem; color:#666;">문의사항이 있으시면 아래 이메일로 연락 주시기 바랍니다.<br><b>contact@forestmind.com</b></p>';
+            }
         }
 
         function closeModal() {
             document.getElementById('modal-box').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal-box');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
 </body>
