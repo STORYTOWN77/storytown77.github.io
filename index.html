@@ -10,11 +10,11 @@
 
     <style>
         :root {
-            --card-bg: rgba(20, 40, 32, 0.75);
-            --accent-green: #2ecc71;
-            --text-light: #ffffff;
-            --text-dim: #d0e0d8;
-            --border-color: rgba(255, 255, 255, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --accent-green: #27ae60;
+            --text-dark: #1b3022;
+            --text-dim: #3a5343;
+            --border-color: rgba(39, 174, 96, 0.25);
         }
 
         * {
@@ -25,13 +25,13 @@
         }
 
         body {
-            background-color: #0f1f1a;
-            color: var(--text-light);
+            background-color: #e8f0ec;
+            color: var(--text-dark);
             line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* 배경 비디오 및 오버레이 (밝게 조정) */
+        /* 바람에 흔들리는 숲 비디오 배경 */
         .video-background {
             position: fixed;
             top: 0;
@@ -46,7 +46,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(1.05) contrast(1.0); /* 밝고 깨끗하게 조정 */
+            filter: brightness(1.1) contrast(0.95);
         }
 
         .overlay {
@@ -55,7 +55,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 20, 15, 0.25); /* 옅은 톤으로 투명도 조절 */
+            background: rgba(255, 255, 255, 0.15);
             z-index: -1;
         }
 
@@ -71,35 +71,35 @@
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            color: #0f2b1d;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.9);
             margin-bottom: 8px;
         }
 
         header p {
-            color: #e0f0e8;
-            font-size: 1.05rem;
-            text-shadow: 0 1px 5px rgba(0,0,0,0.7);
+            color: #1c402e;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9);
         }
 
-        /* 카드 UI */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 28px;
             margin-bottom: 25px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
         .section-title {
             font-size: 1.25rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 18px;
-            color: #4cd137;
+            color: #1e6b3c;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -114,12 +114,13 @@
             justify-content: space-between;
             margin-bottom: 6px;
             font-size: 0.95rem;
+            font-weight: 600;
         }
 
         input[type="range"] {
             width: 100%;
             height: 6px;
-            background: rgba(255, 255, 255, 0.3);
+            background: #c2d6cb;
             border-radius: 3px;
             outline: none;
             accent-color: var(--accent-green);
@@ -134,20 +135,20 @@
         }
 
         .btn {
-            background: rgba(255, 255, 255, 0.12);
+            background: #ffffff;
             border: 1px solid var(--border-color);
-            color: var(--text-light);
+            color: var(--text-dark);
             padding: 12px;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .btn:hover, .btn.active {
             background: var(--accent-green);
-            color: #000;
-            font-weight: 600;
+            color: #ffffff;
             border-color: var(--accent-green);
         }
 
@@ -161,7 +162,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
             transition: transform 0.2s;
             margin-top: 10px;
         }
@@ -170,17 +171,12 @@
             transform: translateY(-2px);
         }
 
-        /* 광고 영역 (빈 박스 테두리 제거) */
         .ad-container {
-            margin: 25px 0;
+            margin: 20px 0;
             text-align: center;
             min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* 아코디언 */
         .accordion-item {
             border-bottom: 1px solid var(--border-color);
         }
@@ -195,9 +191,9 @@
             border: none;
             padding: 16px 8px;
             text-align: left;
-            color: var(--text-light);
+            color: var(--text-dark);
             font-size: 1.02rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -223,11 +219,6 @@
             margin-bottom: 12px;
         }
 
-        .accordion-content h4 {
-            color: #ffffff;
-            margin: 14px 0 6px 0;
-        }
-
         .arrow {
             transition: transform 0.3s ease;
         }
@@ -239,38 +230,38 @@
         footer {
             text-align: center;
             padding: 30px 0;
-            color: #d0e0d8;
+            color: #2b4c38;
             font-size: 0.85rem;
+            font-weight: 600;
             border-top: 1px solid var(--border-color);
             margin-top: 40px;
         }
 
         footer a {
-            color: #d0e0d8;
+            color: #2b4c38;
             text-decoration: none;
             margin: 0 10px;
         }
 
-        /* 모달 */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
 
         .modal-content {
-            background: #142822;
+            background: #ffffff;
             border: 1px solid var(--border-color);
             padding: 25px;
             border-radius: 12px;
             max-width: 500px;
             width: 90%;
-            color: var(--text-light);
+            color: var(--text-dark);
         }
 
         .modal-close {
@@ -282,11 +273,9 @@
 </head>
 <body>
 
-    <!-- 바람에 흔들리는 숲 비디오 배경 -->
     <div class="video-background">
-        <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80">
-            <source src="https://cdn.pixabay.com/video/2020/05/25/40121-424089856_large.mp4" type="video/mp4">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-sun-shining-through-the-trees-of-a-forest-41539-large.mp4" type="video/mp4">
+        <video autoplay loop muted playsinline>
+            <source src="https://assets.mixkit.co/videos/download/mixkit-sun-shining-through-the-trees-of-a-forest-41539-medium.mp4" type="video/mp4">
         </video>
     </div>
     <div class="overlay"></div>
@@ -297,7 +286,6 @@
             <p>바이노럴 비트와 자연 앰비언트 믹서로 깊은 이완과 집중을 경험하세요.</p>
         </header>
 
-        <!-- 상단 광고 영역 -->
         <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -308,7 +296,6 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <!-- 메인 오디오 콘솔 -->
         <div class="card">
             <div class="section-title">📊 마음 상태 설정</div>
             <div class="control-group">
@@ -328,7 +315,6 @@
             <button class="main-play-btn" id="play-toggle" onclick="toggleAudio()">▶ 숲속 사운드 재생하기</button>
         </div>
 
-        <!-- 앰비언트 믹서 -->
         <div class="card">
             <div class="section-title">🎛️ 사운드 볼륨 믹서</div>
             <div class="control-group">
@@ -354,7 +340,6 @@
             </div>
         </div>
 
-        <!-- 학술 아티클 22개 세션 -->
         <div class="card">
             <div class="section-title">📚 숲의 글 (뇌과학 & 심리학 전문 칼럼 22선)</div>
 
@@ -366,7 +351,7 @@
                     { title: "04. 숲 치료(Forest Therapy)가 자율신경계에 미치는 영향", body: "삼림욕 환경은 NK세포(자연살해세포)의 활성도를 높이고 부교감신경계를 활성화합니다. 음향 사운드는 이러한 숲의 생리적 이점을 뇌에 직접 전달합니다." },
                     { title: "05. 바이노럴 비트 청취 시 가바(GABA) 및 세로토닌의 변화", body: "뇌파 동기화 자극은 억제성 신경전달물질인 GABA의 분비를 촉진하고 세로토닌 합성을 도와 불안감과 정서적 불균형을 신속하게 완화시킵니다." },
                     { title: "06. 현대인의 번아웃 증후군과 뇌 피로 회복 기전", body: "지속적인 정보 과부하는 디폴트 모드 네트워크(DMN)를 과열시킵니다. 단일 앰비언트 음향은 DMN의 불필요한 활성화를 막아 심층적 휴식을 제공합니다." },
-                    { title: "07. 청각 자극을 통한 수면 구조 개선과 서파 수면(Slow-wave Sleep)", body: "수면 전 핑크 노이즈 청취는 N3 단계의 델타파 깊은 수면 진입 속도를 촉진하며 수면 중 깨어남(Arousal)을 크게 방지합니다." },
+                    { title: "07. 청각 자극을 통한 수면 구조 개선과 서파 수면", body: "수면 전 핑크 노이즈 청취는 N3 단계의 델타파 깊은 수면 진입 속도를 촉진하며 수면 중 깨어남(Arousal)을 크게 방지합니다." },
                     { title: "08. 피톤치드 향과 숲 사운드의 다감각 심리 이완", body: "시각 및 청각적 자연 자극이 통합될 때 전두엽 피질의 산소 소비량이 감소하여 뇌의 휴식 반응이 극대화됩니다." },
                     { title: "09. 6Hz 테타파와 창의적 사고 및 기억력 정돈", body: "테타파 대역은 무의식적 아이디어 결합과 장기 기억 단단화(Consolidation)가 활발히 일어나는 상위 인지 상태입니다." },
                     { title: "10. 불면증 개선을 위한 백색소음 vs 핑크소음 심층 비교", body: "고주파 에너지가 강한 백색소음보다 주파수가 높아질수록 감쇄하는 핑크소음이 수면 유지 및 심박 안정에 훨씬 효과적입니다." },
@@ -398,7 +383,6 @@
             </script>
         </div>
 
-        <!-- 하단 광고 영역 -->
         <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -419,7 +403,6 @@
         </footer>
     </div>
 
-    <!-- 모달 -->
     <div id="modal-box" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
@@ -451,7 +434,6 @@
             binauralOscL.start();
             binauralOscR.start();
 
-            // 핑크 노이즈
             const bufferSize = audioCtx.sampleRate * 2;
             const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
             const output = noiseBuffer.getChannelData(0);
@@ -476,7 +458,6 @@
             gainRain.connect(audioCtx.destination);
             rainNode.start();
 
-            // 브라운 노이즈
             const brownBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
             const brownOut = brownBuffer.getChannelData(0);
             let lastOutput = 0.0;
